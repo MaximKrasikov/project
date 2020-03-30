@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="mai" id="2020013102305-device-migration">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="DEVICE_SEQ"/>
+                <tableExists tableName="DEVICE"/>
+            </not>
+        </preConditions>
+
+        <createSequence sequenceName="DEVICE_SEQ" incrementBy="10" startValue="1"/>
+
+        <createTable tableName="DEVICE">
+            <column name="ID" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="DEVICE_PK"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UNIT_NAME" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>
